@@ -41,3 +41,41 @@ body {
   background: rgba(15, 23, 42, 0.12);
   color: var(--navy);
 }
+
+/* Protein Stick Custom Scrollbar */
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #12253e #f8f9fa;
+}
+
+/* Chrome, Edge, and Safari */
+html::-webkit-scrollbar,
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+html::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 20px;
+}
+
+html::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #0d1a2b 0%, #172c49 30%, #1c365a 50%, #172c49 70%, #0d1a2b 100%);
+  border-radius: 20px;
+  border: 2px solid #f8f9fa; /* Creates a clean gap around the stick */
+}
+
+html::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #102138 0%, #1e3a60 30%, #254675 50%, #1e3a60 70%, #102138 100%);
+  box-shadow: 0 0 8px rgba(18, 37, 62, 0.4);
+}
+
+html::-webkit-scrollbar-thumb:active,
+::-webkit-scrollbar-thumb:active {
+  border: 3px solid #f8f9fa; /* Gives the "squeezed" effect when dragging */
+}

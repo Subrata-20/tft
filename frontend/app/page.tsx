@@ -1,9 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
+import Mascot from "@/components/Mascot";
+import IngredientCarousel from "@/components/IngredientCarousel";
 
 type Product = {
   name: string;
@@ -11,6 +14,7 @@ type Product = {
   note: string;
   gradient: string;
   glow: string;
+  image: string;
 };
 
 const features = [
@@ -57,7 +61,8 @@ const products: Product[] = [
     ingredients: "Dates · Soy protein · Peanuts",
     note: "Balanced, rich, and easy to stock.",
     gradient: "linear-gradient(180deg, #12253e 0%, #223f66 48%, #101923 100%)",
-    glow: "rgba(15, 23, 42, 0.28)",
+     glow: "rgba(15, 23, 42, 0.28)",
+     image: "/Gemini_Generated_Image_svb3oasvb3oasvb3.png",
   },
   {
     name: "Golden Peanut",
@@ -65,6 +70,7 @@ const products: Product[] = [
     note: "Warm, clean, and gym-friendly.",
     gradient: "linear-gradient(180deg, #d7a470 0%, #e8bf93 48%, #8a5a2e 100%)",
     glow: "rgba(240, 165, 110, 0.26)",
+    image: "/Gemini_Generated_Image_ggys2sggys2sggys.png",
   },
   {
     name: "Midnight Cocoa",
@@ -72,6 +78,7 @@ const products: Product[] = [
     note: "Premium, focused, and retail-ready.",
     gradient: "linear-gradient(180deg, #0d1522 0%, #223247 50%, #08101a 100%)",
     glow: "rgba(59, 130, 246, 0.22)",
+    image: "/Gemini_Generated_Image_svb3oasvb3oasvb3.png",
   },
 ];
 
@@ -158,74 +165,6 @@ function SectionHeading({
   );
 }
 
-function ProductArt({ gradient }: { gradient: string }) {
-  return (
-    <div className="relative isolate overflow-hidden rounded-4xl border border-white/70 bg-white/75 p-5 shadow-[0_28px_90px_rgba(9,20,35,0.12)] backdrop-blur-xl">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(220,233,255,0.95),rgba(255,255,255,0.05)_55%)]" />
-      <div className="relative flex min-h-96 flex-col justify-between">
-        <div className="flex items-center justify-between text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-[#5b6472]">
-          <span>The Fit Tales</span>
-          <span>16 cm stick</span>
-        </div>
-
-        <div className="relative flex min-h-64 items-center justify-center py-6">
-          <div className="absolute bottom-9 h-5 w-44 rounded-full bg-black/10 blur-2xl" />
-
-          <div
-            className="absolute left-1/2 top-8 h-56 w-11 -translate-x-1/2 rotate-12 rounded-full"
-            style={{ backgroundImage: gradient, boxShadow: `0 22px 45px ${"rgba(15, 23, 42, 0.24)"}` }}
-          />
-          <div className="absolute left-1/2 top-14 h-48 w-42 -translate-x-1/2 rounded-3xl border border-white/80 bg-white/90 p-4 shadow-[0_18px_45px_rgba(15,23,42,0.08)]">
-            <div className="flex h-full flex-col justify-between">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-[#5b6472]">
-                  <span>Protein Stick</span>
-                  <span>30g</span>
-                </div>
-                <div className="h-px w-full bg-[#0f172a]/10" />
-                <p className="font-(family-name:--font-display) text-lg font-semibold tracking-tight text-[#091423]">
-                  Not Your Average Protein Bar.
-                </p>
-                <p className="max-w-36 text-sm leading-6 text-[#5b6472]">
-                  This is a protein stick built for premium shelves and busy lives.
-                </p>
-              </div>
-
-              <div className="rounded-2xl bg-[#f7f9fc] p-3 shadow-inner shadow-black/5">
-                <div className="flex items-center justify-between text-xs font-medium text-[#5b6472]">
-                  <span>Portable</span>
-                  <span>Clean</span>
-                  <span>Premium</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute right-8 bottom-10 rounded-full border border-[#0f172a]/10 bg-white/85 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-[#091423] shadow-sm">
-            30g protein
-          </div>
-          <div className="absolute left-8 top-14 rounded-full border border-[#0f172a]/10 bg-white/85 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-[#091423] shadow-sm">
-            Clean nutrition
-          </div>
-        </div>
-
-        <div className="grid gap-3 sm:grid-cols-3">
-          {[
-            ["Shelf ready", "Premium pack language"],
-            ["Gym friendly", "Easy to grab between sessions"],
-            ["D2C + B2B", "Built for retail and direct conversion"],
-          ].map(([title, copy]) => (
-            <div key={title} className="rounded-3xl border border-[#0f172a]/8 bg-white/80 p-3 shadow-[0_10px_30px_rgba(9,20,35,0.06)]">
-              <p className="text-sm font-semibold text-[#091423]">{title}</p>
-              <p className="mt-1 text-xs leading-5 text-[#5b6472]">{copy}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function FeatureIcon({ children }: { children: ReactNode }) {
   return (
     <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#0f172a]/8 bg-white shadow-sm">
@@ -236,89 +175,94 @@ function FeatureIcon({ children }: { children: ReactNode }) {
   );
 }
 
+function ProductMockup({ size = "base", animated = true, src = "/Gemini_Generated_Image_svb3oasvb3oasvb3.png" }: { size?: "sm" | "base" | "lg"; animated?: boolean; src?: string }) {
+  const sizeMap = {
+    sm: "w-20 h-32",
+    base: "w-32 h-56",
+    lg: "w-72 h-[40rem]",
+  };
+
+  return (
+    <motion.div
+      animate={animated ? { y: [0, -12, 0] } : {}}
+      transition={animated ? { duration: 4, repeat: Infinity, ease: "easeInOut" } : {}}
+      className={`${sizeMap[size]} relative mx-auto bg-transparent`}
+      whileHover={animated ? { scale: 1.05 } : {}}
+    >
+      <Image
+        src={src}
+        alt="The Fit Tales product mockup"
+        fill
+        className="object-contain drop-shadow-2xl"
+        priority
+        sizes="(max-width: 768px) 120px, (max-width: 1024px) 200px, 300px"
+      />
+    </motion.div>
+  );
+}
+
 export default function Home() {
   return (
     <div className="relative overflow-hidden">
       <Navbar />
+      <Mascot />
 
       <main id="top" className="relative">
-        <section className="relative isolate overflow-hidden">
-          <div className="absolute inset-0">
+        <section className="relative z-30">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute -top-28 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[#dce9ff]/60 blur-3xl" />
             <div className="absolute -right-24 top-24 h-64 w-64 rounded-full bg-[#f0a56e]/12 blur-3xl" />
-            <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-[#091423]/10 to-transparent" />
           </div>
 
-          <div className="mx-auto grid max-w-7xl gap-16 px-6 pb-20 pt-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10 lg:px-8 lg:pb-28 lg:pt-16">
+          <div className="mx-auto grid max-w-7xl gap-8 px-6 pb-0 pt-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10 lg:px-8 lg:pb-0 lg:pt-10">
             <motion.div
               initial="hidden"
               animate="visible"
               variants={sectionVariants}
-              className="relative z-10 flex flex-col justify-center"
+              className="relative z-10 flex flex-col justify-start lg:pt-4"
             >
-              <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-[#091423]/10 bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[#5b6472] shadow-sm backdrop-blur">
+              <div className="mb-3 inline-flex w-fit items-center gap-2 rounded-full border border-[#091423]/10 bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-[#5b6472] shadow-sm backdrop-blur">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#f0a56e]" />
                 Clean protein, premium format
               </div>
 
-              <h1 className="max-w-3xl font-(family-name:--font-display) text-5xl font-semibold tracking-tight text-[#091423] sm:text-6xl lg:text-7xl xl:text-8xl">
+              <h1 className="max-w-3xl font-(family-name:--font-display) text-4xl font-semibold tracking-tight leading-[1.08] text-[#091423] sm:text-5xl lg:text-6xl xl:text-7xl">
                 <span className="block">Not Your Average Protein Bar.</span>
-                <span className="mt-1 block text-[#223f66]">This is a Protein Stick.</span>
+                <span className="block text-[#223f66]">This is a Protein Stick.</span>
               </h1>
 
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5b6472] sm:text-xl">
+              <p className="mt-4 max-w-2xl text-lg leading-7 text-[#5b6472] sm:text-xl">
                 The Fit Tales is a premium high-protein snack stick for gym-goers, busy professionals,
-                and B2B buyers who want a better shelf story. 30g protein, clean ingredients, and a format that stands out.
-              </p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                {ctaButtons.map((button) => (
-                  <motion.a
-                    key={button.label}
-                    href={button.href}
-                    whileHover={{ y: -2, x: 2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={
-                      button.primary
-                        ? "inline-flex items-center justify-center rounded-full bg-[#091423] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(9,20,35,0.22)] transition-shadow hover:shadow-[0_20px_45px_rgba(9,20,35,0.28)]"
-                        : "inline-flex items-center justify-center rounded-full border border-[#091423]/10 bg-white/85 px-6 py-3.5 text-sm font-semibold text-[#091423] shadow-[0_12px_32px_rgba(9,20,35,0.07)] backdrop-blur transition-colors hover:border-[#091423]/15 hover:bg-white"
-                    }
-                  >
-                    {button.label}
-                  </motion.a>
-                ))}
-              </div>
-
-              <div className="mt-10 grid max-w-xl grid-cols-3 gap-3 sm:gap-4">
-                {[
-                  ["30g", "protein per stick"],
-                  ["16cm", "long stick format"],
-                  ["Clean", "ingredients-first"],
-                ].map(([value, label]) => (
-                  <div key={value} className="rounded-3xl border border-[#091423]/8 bg-white/80 p-4 shadow-[0_14px_35px_rgba(9,20,35,0.06)] backdrop-blur">
-                    <p className="font-(family-name:--font-display) text-2xl font-semibold text-[#091423] sm:text-3xl">{value}</p>
-                    <p className="mt-1 text-sm leading-5 text-[#5b6472]">{label}</p>
-                  </div>
-                ))}
-              </div>
+                and B2B buyers who want a better shelf story. <span className="font-semibold text-[#091423]">30g protein, clean ingredients, and a format that stands out.</span>
+              </p>    
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 28, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="relative z-10 lg:pt-4"
+              className="relative z-10 lg:pt-4 flex justify-center"
             >
-              <div className="mb-4 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.28em] text-[#5b6472] lg:hidden">
-                <span>Hero visual</span>
-                <span>Premium D2C + B2B</span>
-              </div>
-              <ProductArt gradient="linear-gradient(180deg, #12253e 0%, #243b5b 50%, #0b111a 100%)" />
+              <ProductMockup size="lg" animated={true} />
             </motion.div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-12">
+        {/* Packaging Zig-Zag Divider */}
+        <div className="relative z-20 w-full h-6 pointer-events-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.06)] -mt-12 lg:-mt-28 flex items-end">
+          <svg width="100%" height="24" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="zigzag" x="0" y="0" width="32" height="24" patternUnits="userSpaceOnUse">
+                <path d="M-16 24 L0 8 L16 24 L32 8 L48 24 Z" fill="#d4e4fc" stroke="#d4e4fc"  />
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="100%" height="24" fill="url(#zigzag)" />
+          </svg>
+        </div>
+
+        <div className="w-full bg-[#d4e4fc] pb-12 pt-4">
+
+        <section className="mx-auto max-w-7xl px-6 pb-8 lg:px-8 lg:pb-12 lg:pt-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -364,28 +308,8 @@ export default function Home() {
                 className="group overflow-hidden rounded-4xl border border-[#091423]/8 bg-white/82 shadow-[0_18px_50px_rgba(9,20,35,0.06)] backdrop-blur-xl"
               >
                 <div className="p-5">
-                  <div className="relative overflow-hidden rounded-3xl border border-white/70 bg-[#f7f9fc] p-4">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(220,233,255,0.92),transparent_55%)]" />
-                    <div className="relative min-h-72">
-                      <div
-                        className="absolute left-1/2 top-7 h-44 w-10 -translate-x-1/2 rotate-12 rounded-full"
-                        style={{ backgroundImage: product.gradient, boxShadow: `0 18px 45px ${product.glow}` }}
-                      />
-                      <div className="absolute left-1/2 top-14 h-36 w-35 -translate-x-1/2 rounded-[1.4rem] border border-white/80 bg-white/92 p-3 shadow-[0_14px_32px_rgba(9,20,35,0.08)]">
-                        <div className="flex h-full flex-col justify-between">
-                          <div className="flex items-center justify-between text-[0.6rem] font-semibold uppercase tracking-[0.28em] text-[#5b6472]">
-                            <span>{product.name}</span>
-                            <span>30g</span>
-                          </div>
-                          <div className="space-y-2">
-                            <div className="h-1.5 w-20 rounded-full bg-[#091423]/85" />
-                            <div className="h-1.5 w-14 rounded-full bg-[#091423]/20" />
-                            <div className="h-1.5 w-24 rounded-full bg-[#091423]/15" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="absolute bottom-0 left-1/2 h-4 w-44 -translate-x-1/2 rounded-full bg-black/10 blur-2xl" />
-                    </div>
+                  <div className="relative overflow-hidden rounded-3xl border border-white/70 bg-[#f7f9fc] p-8 flex justify-center min-h-72">
+                    <ProductMockup size="sm" animated={true} src={product.image} />
                   </div>
 
                   <div className="mt-5 flex items-center justify-between gap-3">
@@ -401,6 +325,42 @@ export default function Home() {
                   <p className="mt-4 text-sm leading-6 text-[#5b6472]">{product.ingredients}</p>
                 </div>
               </motion.article>
+            ))}
+          </motion.div>
+        </section>
+
+        <section id="nutrition" className="mx-auto max-w-7xl px-6 py-14 lg:px-8 lg:py-20">
+          <SectionHeading
+            eyebrow="Core Nutrition"
+            title="Clean macros. No hiding behind the label."
+            description="We focus on what matters most: high protein and clean energy, without the added junk."
+          />
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={sectionVariants}
+            className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4"
+          >
+            {[
+              { label: "Protein", value: "30g" },
+              { label: "Calories", value: "220" },
+              { label: "Added Sugar", value: "0g" },
+              { label: "Net Carbs", value: "8g" }
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                whileHover={{ y: -4 }}
+                className="flex flex-col items-center justify-center rounded-3xl border border-[#091423]/8 bg-white/85 p-6 shadow-[0_12px_30px_rgba(9,20,35,0.05)] transition-shadow hover:shadow-[0_18px_38px_rgba(9,20,35,0.08)]"
+              >
+                <p className="font-(family-name:--font-display) text-3xl font-bold text-[#091423] lg:text-4xl">
+                  {stat.value}
+                </p>
+                <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-[#5b6472]">
+                  {stat.label}
+                </p>
+              </motion.div>
             ))}
           </motion.div>
         </section>
@@ -445,9 +405,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="rounded-4xl border border-[#091423]/8 bg-white/78 p-5 shadow-[0_20px_60px_rgba(9,20,35,0.08)] backdrop-blur-xl"
+                className="rounded-4xl border border-[#091423]/8 bg-white/78 p-5 shadow-[0_20px_60px_rgba(9,20,35,0.08)] backdrop-blur-xl flex justify-center"
               >
-                <ProductArt gradient="linear-gradient(180deg, #c47d42 0%, #e0a66f 50%, #7a4d25 100%)" />
+                <ProductMockup size="base" animated={true} />
                 <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
                   <div className="rounded-2xl border border-[#091423]/8 bg-[#f7f9fc] p-3">
                     <p className="text-xs uppercase tracking-[0.24em] text-[#5b6472]">Protein</p>
@@ -466,6 +426,57 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <section id="positioning" className="mx-auto max-w-7xl px-6 py-14 lg:px-8 lg:py-20">
+          <SectionHeading
+            eyebrow="Versatile Form Factor"
+            title="Designed for where your customers are."
+            description="A premium product means it works perfectly in high-end retail, hospitality, fitness, and corporate environments. Slide to explore."
+          />
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-10 -mx-6 px-6 lg:-mx-8 lg:px-8"
+          >
+            <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 hide-scrollbar">
+              {[
+                { title: "Hotel Minibars", description: "Elevate your guest experience with a clean, guilt-free premium snack." },
+                { title: "Gym Counters", description: "A high-protein impulse buy perfectly positioned for post-workout recovery." },
+                { title: "Corporate Pantries", description: "Provide employees with steady energy instead of sugar crashes." },
+                { title: "Cafes & Coffee Shops", description: "A sleek add-on to morning orders that complements your brand." },
+                { title: "Travel & Transit", description: "Easy-to-carry nourishment for busy professionals on the move." }
+              ].map((item, index) => (
+                <div 
+                  key={index}
+                  className="min-w-[280px] max-w-[320px] shrink-0 snap-center snap-always rounded-3xl border border-[#091423]/8 bg-white/82 shadow-[0_16px_40px_rgba(9,20,35,0.06)] backdrop-blur-xl overflow-hidden flex flex-col"
+                >
+                  <div className="h-48 w-full bg-[#f7f9fc] border-b border-[#091423]/5 flex items-center justify-center text-[#5b6472]">
+                    <span className="text-sm font-medium opacity-50">[Image: {item.title}]</span>
+                  </div>
+                  <div className="p-6 flex flex-col flex-grow">
+                    <h3 className="font-(family-name:--font-display) text-xl font-semibold text-[#091423]">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-[#5b6472]">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/* Minimal Custom Scrollbar Styles for the Carousel */}
+            <style jsx>{`
+              .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+              }
+              .hide-scrollbar {
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;  /* Firefox */
+              }
+            `}</style>
+          </motion.div>
+        </section>
+
+        <IngredientCarousel />
 
         <section id="business" className="mx-auto max-w-7xl px-6 py-14 lg:px-8 lg:py-20">
           <SectionHeading
@@ -639,6 +650,19 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </section>
+
+        </div>
+
+        <section className="w-full bg-[#d4e4fc]">
+          <Image
+            src="/Gemini_Generated_Image_ggys2sggys2sggys.png"
+            alt="The Fit Tales Full Page Visual"
+            width={1920}
+            height={1080}
+            className="w-full h-auto"
+            priority
+          />
         </section>
       </main>
 
